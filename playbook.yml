@@ -1,5 +1,5 @@
 - name: Test Playbook
-  hosts: all
+  hosts: localhost
   become: yes
   remote_user: semaphore
   tasks:
