@@ -1,7 +1,6 @@
 - name: Test Playbook
   hosts: localhost
-  become: yes
-  remote_user: semaphore
+  connection: local
   tasks:
     - name: Ping
       ansible.builtin.ping:
