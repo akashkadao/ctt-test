@@ -1,30 +1,24 @@
 - name: Test Playbook
   hosts: localhost
   connection: local
+  gather_fatcs: yes
   become: true
-  vars:
-    web_content: "<h1>Welcome to the Ansible Demo Page!</h1>"
   tasks:
     - name: Ping
       ansible.builtin.ping:
       
-    - name: Ensure Apache/HTTPD package is installed
-      ansible.builtin.package:
-        name:
-          - apache2
-          - httpd   
-        state: present 
+   - name: Update apt package cache
+      ansible.builtin.apt:
+        update_cache: yes
+      changed_when: false
 
-    - name: Create a simple index.html file
-      ansible.builtin.copy:
-        content: "{{ web_content }}"
-        dest: /var/www/html/index.html
-        owner: root
-        group: root
-        mode: '0644'
+    - name: Install Apache2 package
+      ansible.builtin.apt:
+        name: apache2
+        state: present
 
-    - name: Ensure the web service is running and enabled on boot
+    - name: Ensure Apache2 service is started and enabled
       ansible.builtin.service:
-        name: "{{ ansible_distribution_service_name }}"
-        state: started 
+        name: apache2
+        state: started
         enabled: true
