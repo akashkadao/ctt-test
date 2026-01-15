@@ -17,3 +17,9 @@
 
     - name: Update apk package index
       ansible.builtin.shell: ip addr
+
+    - name: Show IPv4 and IPv6 addresses
+      debug:
+        msg:
+          - "IPv4: {{ ansible_all_ipv4_addresses }}"
+          - "IPv6: {{ ansible_all_ipv6_addresses }}"
