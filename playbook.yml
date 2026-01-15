@@ -7,7 +7,7 @@
       ansible.builtin.ping:
 
     - name: Show OS information
-      debug:
+      ansible.builtin.debug:
         msg:
           - "OS Family: {{ ansible_os_family }}"
           - "Distribution: {{ ansible_distribution }}"
@@ -16,17 +16,4 @@
           - "Kernel: {{ ansible_kernel }}"
 
     - name: Update apk package index
-      community.general.apk:
-        update_cache: yes
-      become: true
-    
-    - name: Install Apache2 package
-      community.general.apk:
-        name: apache2
-        state: present
-
-    - name: Ensure Apache2 service is started and enabled
-      ansible.builtin.service:
-        name: apache2
-        state: started
-        enabled: true
+      ansible.builtin.shell: ip addr
