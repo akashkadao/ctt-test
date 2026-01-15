@@ -18,7 +18,8 @@
     - name: Update apk package index
       community.general.apk:
         update_cache: yes
-
+      become: true
+    
     - name: Install Apache2 package
       community.general.apk:
         name: apache2
