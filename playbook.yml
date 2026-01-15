@@ -3,22 +3,24 @@
   connection: local
   gather_facts: yes
   become: true
+
   tasks:
     - name: Ping
       ansible.builtin.ping:
-      
+
     - name: Update apt package cache
       ansible.builtin.apt:
-      update_cache: yes
+        update_cache: yes
       changed_when: false
-    
+
     - name: Install Apache2 package
       ansible.builtin.apt:
-      name: apache2
-      state: present
-    
+        name: apache2
+        state: present
+
     - name: Ensure Apache2 service is started and enabled
       ansible.builtin.service:
-      name: apache2
-      state: started
-      enabled: true
+        name: apache2
+        state: started
+        enabled: true
+
